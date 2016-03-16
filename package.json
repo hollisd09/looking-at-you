@@ -1,0 +1,54 @@
+{
+  "name": "looking-at-you",
+  "version": "1.0.0",
+  "description": "\"Here's looking at you, kid.\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "serve": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hollisd09/looking-at-you.git"
+  },
+  "eslintConfig": {
+    "env": {
+      "mocha": true,
+      "node": true,
+      "es6": true,
+      "browser": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "res": true,
+      "app": true
+    },
+    "rules": {
+      "no-console": 0
+    }
+  },
+  "author": "Danielle Hollis <hollisd09@gmail.com> (http://www.hollisdesignsstudio.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hollisd09/looking-at-you/issues"
+  },
+  "homepage": "https://github.com/hollisd09/looking-at-you#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.15.0",
+    "bower": "^1.7.7",
+    "connect-redis": "^3.0.2",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.7",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "sqlite3": "^3.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}
