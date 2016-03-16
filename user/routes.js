@@ -7,6 +7,7 @@ const router = express.Router()
 const User = require('./model')
 
 require('./local')
+require('../routes/')
 
 // LOGIN
 router.get('/login', (req, res) => {

@@ -10,7 +10,7 @@ const passport = require('passport')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 
-const userRoutes = require('routes/routes')
+const userRoutes = require('./user/routes')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -25,7 +25,7 @@ app.use(session({
   store: new RedisStore()
 }))
 app.use(flash())
-app.use(passport.initalize())
+app.use(passport.initialize())
 app.use(passport.session)
 
 app.locals.title = ''
