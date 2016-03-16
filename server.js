@@ -2,14 +2,15 @@
 
 const bodyParser = require('body-parser')
 const express = require('express')
-const methodOverride = require('methodOverride')
-// const mongoose = require('mongoose')
+const flash = require('flash')
+const methodOverride = require('method-override')
+const mongoose = require('mongoose')
 // const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 
-const routes = require('./routes/')
+const userRoutes = require('routes/routes')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -23,15 +24,28 @@ app.use(session({
   secret: SESSION_SECRET,
   store: new RedisStore()
 }))
+app.use(flash())
 app.use(passport.initalize())
 app.use(passport.session)
 
+app.locals.title = ''
 
-
-//maybe include sass?
-
-app.use(routes)
-
-app.listen(PORT, () => {
-  console.log(`Express server running on port: ${PORT}`);
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
 })
+
+app.use(userRoutes)
+
+app.get('/', (req, res) => {
+  res.render('index', { message: req.flash('info') })
+})
+
+mongoose.connect('mongodb://localhost:27017/casablanca', (err) => {
+  if (err) throw err
+
+  app.listen(PORT, () => {
+    console.log(`App listening on port: ${PORT}`);
+  })
+})
+
