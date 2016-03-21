@@ -2,15 +2,16 @@
 
 const bodyParser = require('body-parser')
 const express = require('express')
-const flash = require('flash')
+// const flash = require('flash')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 // const path = require('path')
-const passport = require('passport')
+// const passport = require('passport')
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 
-const userRoutes = require('./user/routes')
+const routes = require('./routes')
+// const userRoutes = require('./user/routes')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -23,10 +24,12 @@ app.use(methodOverride('_method'))
 app.use(session({
   secret: SESSION_SECRET,
   store: new RedisStore()
+  // resave: true,
+  // saveUninitialized: true
 }))
-app.use(flash())
-app.use(passport.initialize())
-app.use(passport.session)
+// app.use(flash())
+// app.use(passport.initialize())
+// app.use(passport.session)
 
 app.locals.title = ''
 
@@ -35,7 +38,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(userRoutes)
+app.use(routes)
 
 app.get('/', (req, res) => {
   res.render('index', { message: req.flash('info') })
