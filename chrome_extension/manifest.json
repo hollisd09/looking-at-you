@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+
+  "name": "Getting started example",
+  "description": "This extension shows a Google Image search result for the current page",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Casablanca"
+  },
+  "content_scripts": [ {
+    "matches": [
+      "http://*.amazon.com/*",
+      "https://*.amazon.com/*",
+      "http://*.diapers.com/*",
+      "https://*.diapers.com/*",
+      "http://*.mbeans.com/*",
+      "https://*.mbeans.com/*",
+      "http://*.giggle.com/*",
+      "https://*.giggle.com/*",
+      "http://*.landofnod.com/*",
+      "https://*.landofnod.com/*",
+      "http://*.walmart.com/*",
+      "https://*.walmart.com/*",
+      "http://*.toysrus.com/*",
+      "https://*.toysrus.com/*",
+      "http://*.buybuybaby.com/*",
+      "https://*.buybuybaby.com/*",
+      "http://*.target.com/*",
+      "https://*.target.com/*"
+    ],
+    "css": ["style.css"],
+    "run_at": "document_end"
+  } ],
+  "permissions": [
+    "activeTab",
+    "http://*/*",
+    "https://*//*",
+    "background"
+  ]
+}
