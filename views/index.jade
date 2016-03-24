@@ -1,7 +1,3 @@
-each msgs, type in messages
-  for msg in msgs
-    p(class=type)=msg
-
 if user
   h1 Hello #{user.firstName}
 
@@ -12,3 +8,6 @@ else
 
   form(action='/login', method='GET')
     input(type='submit', value='Login')
+
+  form(action='/register', method='GET')
+    input(type='submit', value='Register')

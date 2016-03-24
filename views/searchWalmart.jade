@@ -1,0 +1,20 @@
+h1 Search Walmart.com for Product
+
+form(action='/searchWalmart', method='POST')
+  .input-group
+    label(for='productName')
+    input#productName(type='text', name='search', autofocus, required, placeholder='ex: Baby Shoes')
+  .input-group
+    input#searchButton(type='submit', value='search')
+
+ul#allImages
+  each val, index in item ? item : ''
+    li= val.name
+    img(src= val.largeImage)
+
+  // things here where the images will be viewable
+  // most likely a slideshow w/ a button under each image that the user will
+  // press in order to add to their registry
+
+script(src='searchWalmart.js')
+
