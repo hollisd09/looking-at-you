@@ -1,21 +1,21 @@
 'use strict'
 
-const bodyParser = require('body-parser')
-const express = require('express')
-// const flash = require('flash')
-const methodOverride = require('method-override')
-const mongoose = require('mongoose')
-// const path = require('path')
-// const passport = require('passport')
-const session = require('express-session')
-const RedisStore = require('connect-redis')(session)
+const bodyParser      = require('body-parser'),
+      express         = require('express'),
+      // flash           = require('flash'),
+      methodOverride  = require('method-override'),
+      mongoose        = require('mongoose'),
+      // path            = require('path'),
+      // passport        = require('passport'),
+      session         = require('express-session'),
+      RedisStore      = require('connect-redis')(session),
 
-const routes = require('./routes')
-// const userRoutes = require('./user/routes')
+      routes          = require('./routes'),
+      // userRoutes      = require('./user/routes'),
 
-const app = express()
-const PORT = process.env.PORT || 3000
-const SESSION_SECRET = process.env.SESSION_SECRET || 'secret'
+      app             = express(),
+      PORT            = process.env.PORT || 3000,
+      SESSION_SECRET  = process.env.SESSION_SECRET || 'secret'
 
 app.set('view engine', 'jade')
 
@@ -52,3 +52,4 @@ mongoose.connect('mongodb://localhost:27017/casablanca', (err) => {
   })
 })
 
+module.exports = app
