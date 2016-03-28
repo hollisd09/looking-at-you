@@ -1,12 +1,9 @@
 'use strict'
 
 const express = require('express')
-// const passport = require('passport')
 const router = express.Router()
 
-const User = require('../user/model')
-
-require('../user/local')
+// require('../user/local')
 require('../routes/')
 
 // LOGIN
@@ -25,34 +22,6 @@ router.delete('/login', (req, res) => {
 
     res.redirect('/')
   })
-})
-
-// REGISTER
-router.get('/register', (req, res) => {
-  res.render('register')
-})
-
-router.post('/register', (req, res) => {
-  if (req.body.password === req.body.verify) {
-    User.findOne({email: req.body.email}, (err, user) => {
-      if (err) throw err
-        console.log(user);
-      if (user) {
-        res.redirect('/login')
-      } else {
-        User.create(req.body, (err) => {
-          if (err) throw err
-
-          res.redirect('/register')
-        })
-      }
-    })
-  } else {
-    res.render('register', {
-      email: req.body.email,
-      message: 'Passwords do not match'
-    })
-  }
 })
 
 module.exports = router;

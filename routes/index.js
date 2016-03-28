@@ -2,11 +2,13 @@
 
 const express = require('express')
 const router = express.Router()
-const addRoute = require('./add')
-const userRoute = require('./user')
 
-router.use(addRoute)
-router.use(userRoute)
-//some sort of .initialize here?
+const Product = require('../user/productSchema')
+
+router.post('/walmart/save', function(req) {
+  let prod = new Product(req.body.shit);
+  prod.save();
+  // console.log(req)
+})
 
 module.exports = router

@@ -1,29 +1,23 @@
 'use strict'
 
-      // const request = require('superagent')
-      const walmart = require('walmart')('mawgaszv6kurpbmkkxazndvh')
-
 const bodyParser      = require('body-parser'),
       express         = require('express'),
-      // flash           = require('flash'),
       methodOverride  = require('method-override'),
       mongoose        = require('mongoose'),
-      // path            = require('path'),
-      // passport        = require('passport'),
       session         = require('express-session'),
       RedisStore      = require('connect-redis')(session),
-   //   routes          = require('./routes'),
-      // userRoutes      = require('./user/routes'),
-
-
+      walmart         = require('walmart')('mawgaszv6kurpbmkkxazndvh'),
 
       app             = express(),
       PORT            = process.env.PORT || 3000,
       SESSION_SECRET  = process.env.SESSION_SECRET || 'secret'
 
+const User = require('./user/userSchema')
+const route = require('./routes')
+
 app.set('view engine', 'jade')
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(methodOverride('_method'))
@@ -33,9 +27,8 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }))
-// app.use(flash())
-// app.use(passport.initialize())
-// app.use(passport.session)
+
+app.use(route)
 
 app.locals.title = ''
 
@@ -47,10 +40,40 @@ app.use((req, res, next) => {
 // app.set(projectOnFire)
 app.use(express.static('public'));
 
-//app.use(routes)
-
 app.get('/', (req, res) => {
   res.render('index')
+})
+
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
+app.get('/register', (req, res) => {
+  res.render('register')
+})
+
+app.post('/register', (req, res) => {
+ if (req.body.password === req.body.verify) {
+    User.findOne({email: req.body.email}, (err, user) => {
+      if (err) throw err
+        console.log(user);
+      if (user) {
+        res.redirect('/login')
+      } else {
+        User.create(req.body, (err) => {
+          if (err) throw err
+          console.log('creating away')
+          console.log(req.body)
+          res.redirect('/searchWalmart')
+        })
+      }
+    })
+  } else {
+    res.render('register', {
+      email: req.body.email,
+      message: 'Passwords do not match'
+    })
+  }
 })
 
 app.get('/searchWalmart', (req, res) => {
@@ -58,25 +81,22 @@ app.get('/searchWalmart', (req, res) => {
 })
 
 app.post('/searchWalmart', (req, res) => {
-  console.log(req.body)
-  walmart.search(req.body.search)
-  .then(function(item) {
-    console.log(item.items)
-
-    res.render('searchWalmart', { item: item.items })
-  })
+  walmart
+    .search(req.body.search)
+    .then(function(item) {
+      res.render('searchWalmart', {
+        item: item.items
+      })
+    })
 })
 
-app.get('/userReg', (req, res) => {
-  res.render('userReg')
+const mongoURL = 'mongodb://localhost:27017/casablanca';
+
+mongoose.connect(mongoURL);
+
+app.listen(PORT, () => {
+  console.log("Server listening on PORT", PORT)
 })
 
-mongoose.connect('mongodb://localhost:27017/casablanca', (err) => {
-  if (err) throw err
-
-  app.listen(PORT, () => {
-    console.log(`App listening on port: ${PORT}`);
-  })
-})
 
 module.exports = app

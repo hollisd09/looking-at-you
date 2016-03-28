@@ -1,19 +1,15 @@
-if message
-  p= message
-
 form(action='/register', method='POST')
   .input-group
     label(for='firstName') Name
     input#firstName(type='text', name='firstName', autofocus, required)
   .input-group
     label(for='email') Email
-    input#email(type='email', name='email', required, value=email)
+    input#email(type='email', name='email', required )
   .input-group
     label(for='pass') Password
     input#pass(type='password', name='password', required)
   .input-group
     label(for='verify') Verify Password
     input#verify(type='password', name='verify', required)
-  .input-group
-    input(type='submit', value='Register')
+  input(type="submit" value="submit")
 

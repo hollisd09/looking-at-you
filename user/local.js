@@ -1,16 +1,16 @@
 'use strict'
 
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+const passport = require('passport'),
+      LocalStrategy = require('passport-local').Strategy,
 
-const User = require('./model')
+      User = require('userSchema.js')
 
 passport.serializeUser(function(user, done) {
   done(null, user._id)
 })
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, done)
+passport.deserializeUser(function(_id, done) {
+  User.findById(_id, done)
 })
 
 passport.use(new LocalStrategy ({

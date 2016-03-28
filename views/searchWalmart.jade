@@ -1,20 +1,28 @@
-h1 Search Walmart.com for Product
+div
+  h1 Search Walmart.com for Product
 
-form(action='/searchWalmart', method='POST')
-  .input-group
-    label(for='productName')
-    input#productName(type='text', name='search', autofocus, required, placeholder='ex: Baby Shoes')
-  .input-group
-    input#searchButton(type='submit', value='search')
+  form(action='/searchWalmart', method='POST')
+    .input-group
+      label(for='productName')
+      input#productName(type='text', name='search', autofocus, required, placeholder='ex: Baby Shoes')
+    .input-group
+      input#searchButton(type='submit', value='search')
 
-ul#allImages
-  each val, index in item ? item : ''
-    li= val.name
-    img(src= val.largeImage)
+  ul#allImages
+    each val, index in item ? item : ''
+      div.group
+        li.productName= val.name
+        li.productPrice= '$' + val.salePrice
+        li.productDesc= val.shortDescription
+        a.productUrl(href= val.productUrl)
+          img.productImage(src= val.mediumImage)
+        input.addButton(type='submit', value='Add to Registry')
 
-  // things here where the images will be viewable
-  // most likely a slideshow w/ a button under each image that the user will
-  // press in order to add to their registry
+  //- Make the images into a 'slideshow' - show more than 10 images
 
-script(src='searchWalmart.js')
+  //- script(src='/lib/angular/angular.min.js')
+
+  //- script(src='/app.js')
+script(src='lib/jquery/dist/jquery.min.js')
+script(src='/searchWalmart.js')
 

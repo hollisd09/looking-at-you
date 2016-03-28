@@ -45,7 +45,6 @@
     "express-session": "^1.13.0",
     "flash": "^1.1.0",
     "jade": "^1.11.0",
-    "jquery": "^2.2.2",
     "method-override": "^2.3.5",
     "mongoose": "^4.4.7",
     "passport": "^0.3.2",
@@ -56,6 +55,7 @@
     "walmart": "0.0.4"
   },
   "devDependencies": {
+    "bower": "^1.7.7",
     "nodemon": "^1.9.1"
   }
 }

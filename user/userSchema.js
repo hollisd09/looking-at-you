@@ -1,14 +1,15 @@
 'use strict'
 
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const mongoose          = require('mongoose'),
+      bcrypt            = require('bcrypt'),
 
-const BCRYPT_DIFFICULTY = 11
+      BCRYPT_DIFFICULTY = 11,
 
-const UserSchema = mongoose.Schema({
-  email: String,
-  password: String
-})
+      UserSchema = mongoose.Schema({
+        name: String,
+        email: String,
+        password: String
+      })
 
 UserSchema.methods.authenticate = function (password, cb) {
   bcrypt.compare(password, this.password, cb)
