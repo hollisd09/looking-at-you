@@ -8,7 +8,11 @@ const mongoose          = require('mongoose'),
       UserSchema = mongoose.Schema({
         name: String,
         email: String,
-        password: String
+        password: String,
+        products: [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Products'
+        }]
       })
 
 UserSchema.methods.authenticate = function (password, cb) {

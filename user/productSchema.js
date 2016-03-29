@@ -1,7 +1,6 @@
 'use strict'
 
 const mongoose    = require('mongoose'),
-      // UserSchema  = require('./userSchema.js'),
 
       ProductSchema = new mongoose.Schema({
         name: String,
@@ -13,3 +12,4 @@ const mongoose    = require('mongoose'),
 
 
 module.exports = mongoose.model('Products', ProductSchema)
+

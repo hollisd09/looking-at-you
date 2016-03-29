@@ -7,7 +7,8 @@ const Product = require('../user/productSchema')
 
 router.post('/walmart/save', function(req) {
   let prod = new Product(req.body.shit);
-  prod.save();
+  prod.save()
+      .then
   // console.log(req)
 })
 
